@@ -2,7 +2,7 @@ import {Client, Intents, Interaction} from 'discord.js'
 import 'dotenv/config'
 import {REST} from "@discordjs/rest";
 import {registerCompetitor} from "./pvp";
-import {setupChannels} from "./guildSetup";
+import {setupChannels} from "./discord/guild-setup";
 
 const client = new Client({
   intents: [
@@ -40,6 +40,10 @@ client.on("messageCreate", (message) => {
   if (message.content.toLowerCase().includes('register') && message.author != client.user) {
     registerCompetitor(message, client)
   }
+})
+
+client.on("channelUpdate", (channel) => {
+  console.log('Channel updated', channel)
 })
 
 client.on("messageReactionAdd", (message) => {
