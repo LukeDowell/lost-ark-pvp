@@ -1,3 +1,5 @@
+import {Client, Message, User} from "discord.js";
+
 export interface Lobby {
   id: string,
   members: Competitor[]
@@ -12,4 +14,9 @@ export interface Team {
 export interface Competitor {
   id: string,
   name: string
+}
+
+export const registerCompetitor = async (message: Message, client: Client) => {
+  console.log('Registering {}', message.author.username)
+  await message.reply({ content: "Welcome, you're going to be registered" })
 }

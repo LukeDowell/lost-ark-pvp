@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/app.ts",
   "scripts": {
-    "start": "ts-node ./src/app.ts",
+    "start": "nodemon",
     "test": "jest"
   },
   "keywords": [],
@@ -20,7 +20,8 @@
     "jest": "^27.5.1",
     "ts-jest": "^27.1.3",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "nodemon": "^2.0.15"
   },
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
