@@ -2,6 +2,7 @@ import {CategoryChannel, Client} from "discord.js";
 import {configureRegistrationChannel} from "./registration-channel";
 import {configureTeamRankedChannel} from "./team-ranked-channel";
 import {configureSparringChannel} from "./sparring-channel";
+import {configureEmojis} from "./emoji";
 
 export const setupChannels = (client: Client) => {
   client.guilds.cache.forEach(async (guild) => {
@@ -11,9 +12,10 @@ export const setupChannels = (client: Client) => {
     }
 
     Promise.all([
+      configureEmojis(guild),
       configureRegistrationChannel(pvpCategory as CategoryChannel),
       configureTeamRankedChannel(pvpCategory as CategoryChannel),
-      configureSparringChannel(pvpCategory as CategoryChannel)
+      configureSparringChannel(pvpCategory as CategoryChannel),
     ]).catch(console.error)
   })
 }

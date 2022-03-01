@@ -1,7 +1,5 @@
-import {Client, Intents, Interaction} from 'discord.js'
+import {Client, Intents} from 'discord.js'
 import 'dotenv/config'
-import {REST} from "@discordjs/rest";
-import {registerCompetitor} from "./pvp";
 import {setupChannels} from "./discord/guild-setup";
 
 const client = new Client({
@@ -23,31 +21,6 @@ const client = new Client({
     Intents.FLAGS.DIRECT_MESSAGE_TYPING,
     Intents.FLAGS.GUILD_SCHEDULED_EVENTS,
   ],
-})
-
-const restClient = new REST({ version: '9' }).setToken(process.env.DISCORD_BOT_TOKEN!!);
-
-client.on("interactionCreate", (interaction: Interaction) => {
-  console.log('Interaction found {}', interaction)
-})
-
-client.on('guildMemberAdd', (guildMember) => {
-  console.log('Guild member joined {}', guildMember)
-})
-
-client.on("messageCreate", (message) => {
-  console.log('Message found {}', message)
-  if (message.content.toLowerCase().includes('register') && message.author != client.user) {
-    registerCompetitor(message, client)
-  }
-})
-
-client.on("channelUpdate", (channel) => {
-  console.log('Channel updated', channel)
-})
-
-client.on("messageReactionAdd", (message) => {
-  console.log('Message reaction found {}', message)
 })
 
 client.once("ready", () => {

@@ -1,5 +1,6 @@
-import {CategoryChannel, MessageEmbed, TextChannel} from "discord.js";
+import {CategoryChannel, Emoji, GuildEmoji, MessageEmbed, ReactionEmoji, TextChannel} from "discord.js";
 import {ChannelTypes} from "discord.js/typings/enums";
+import {PVP_EMOJIS} from "./emoji";
 
 export const configureRegistrationChannel = async (parentCategory: CategoryChannel) => {
   const guild = parentCategory.guild
@@ -18,19 +19,15 @@ export const configureRegistrationChannel = async (parentCategory: CategoryChann
 
   const registrationEmbed = new MessageEmbed()
     .setColor('#0099ff')
-    .setTitle('Some title')
-    .setURL('https://discord.js.org/')
-    .setDescription('Some description here')
-    .setThumbnail('https://i.imgur.com/AfFp7pu.png')
-    .addFields(
-      { name: 'Regular field title', value: 'Some value here' },
-      { name: '\u200B', value: '\u200B' },
-      { name: 'Inline field title', value: 'Some value here', inline: true },
-      { name: 'Inline field title', value: 'Some value here', inline: true },
-    )
-    .addField('Inline field title', 'Some value here', true)
-    .setImage('https://i.imgur.com/AfFp7pu.png')
-    .setTimestamp()
+    .setTitle('Competitor Registration')
+    .setDescription('Click the appropriate reaction for your region below')
 
-  registrationChannel.send({ embeds: [registrationEmbed] })
+  registrationChannel.send({ embeds: [registrationEmbed] }).then((response) => {
+    PVP_EMOJIS.map((e) => e.name)
+      .forEach((job) => {
+        const id = response.guild?.emojis.cache.find((e) => e.name === job)?.id || ''
+        response.react(id)
+      })
+    response.react(':artillerist:')
+  })
 }

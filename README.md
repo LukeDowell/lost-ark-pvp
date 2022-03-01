@@ -44,3 +44,23 @@ to use it and have it operate within it's own channel category is much more like
 Stuff like this is pretty neat:
 
 <img src="https://puu.sh/ILX6v/7ece9f8ca9.png" alt="example embed" />
+
+** 2/28/2022 **
+
+I've got a prototype 'embed' to be rendered in the registrations channel
+
+<img src="https://puu.sh/IM8ht/043dee505f.png" alt="example embed" />
+
+It's easy to use the discordjs library to create new posts but I have been finding myself wanting only 
+to do a bunch of things as long as it doesn't already exist. Creating channels, categories, emojis and
+now embeds. Currently I'm just querying the guild and seeing if a component with the same name already
+exists, but I'm wondering if that is the best move.
+
+I'm slowly chewing on how matchmaking is going to work. I'm going to plan for tons of people even though
+that isn't likely, it'll be fun to learn a possible solution for that. I should check out Fightcade again
+and see if they have some kind of matchmaking system, I can't remember if it was just person-to-person
+invitations or not.
+
+Another thing I have been thinking about; why can't every instance of my bot across any number of guilds
+use the same matchmaking ladder? I wonder if there is a way I can have anyone queue with anyone else across
+servers and just send DMs to all the participants. 
