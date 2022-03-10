@@ -1,5 +1,11 @@
 # Lost  Ark PVP
 
+### Getting Started
+
+`docker run --name lostarkpvp-redis -p 6379:6379 -d redislabs/rejson:latest --save 60 1 --loglevel warning`
+
+### About 
+
 Discord bot for managing PVP related activities
 
  * Server Registration

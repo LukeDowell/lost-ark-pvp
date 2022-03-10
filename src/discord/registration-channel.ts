@@ -1,4 +1,4 @@
-import {CategoryChannel, Emoji, GuildEmoji, MessageEmbed, ReactionEmoji, TextChannel} from "discord.js";
+import {CategoryChannel, MessageEmbed, TextChannel} from "discord.js";
 import {ChannelTypes} from "discord.js/typings/enums";
 import {PVP_EMOJIS} from "./emoji";
 
@@ -17,17 +17,25 @@ export const configureRegistrationChannel = async (parentCategory: CategoryChann
       }) as TextChannel
   }
 
-  const registrationEmbed = new MessageEmbed()
+  const classEmbed = new MessageEmbed()
     .setColor('#0099ff')
     .setTitle('Competitor Registration')
-    .setDescription('Click the appropriate reaction for your region below')
+    .setDescription('Click t he appropriate reaction for your region below')
 
-  registrationChannel.send({ embeds: [registrationEmbed] }).then((response) => {
-    PVP_EMOJIS.map((e) => e.name)
-      .forEach((job) => {
-        const id = response.guild?.emojis.cache.find((e) => e.name === job)?.id || ''
-        response.react(id)
-      })
-    response.react(':artillerist:')
-  })
+  const existingEmbed = registrationChannel.messages.cache.find(
+    (m) => {
+      return m.embeds.some((e) => e.title === classEmbed.title)
+    }
+  )
+
+  if (!existingEmbed) {
+    console.log("No existing embed!")
+    registrationChannel.send({ embeds: [classEmbed] }).then((response) => {
+      PVP_EMOJIS.map((e) => e.name)
+        .forEach((job) => {
+          const id = response.guild?.emojis.cache.find((e) => e.name === job)?.id || ''
+          response.react(id)
+        })
+    })
+  }
 }

@@ -23,8 +23,7 @@ const client = new Client({
   ],
 })
 
-client.once("ready", () => {
-  setupChannels(client)
-})
+
+client.once("ready", () => setupChannels(client))
 
 client.login(process.env.DISCORD_BOT_TOKEN).catch(console.error)
